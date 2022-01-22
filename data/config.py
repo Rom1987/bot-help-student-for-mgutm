@@ -16,15 +16,13 @@ admins = [
     os.getenv("ADMIN_ID"),
 ]
 
-ip = os.getenv("ip")
-
 # Ссылка подключения к базе данных
-POSTGRES_URI = f"postgresql://{PGUSER}:{PGPASSWORD}@{ip}/{DATABASE}"
+DATABASE_URL = os.getenv("DATABASE_URL")
 aiogram_redis = {
-    'host': ip,
+    'host': DATABASE_URL,
 }
 
 redis = {
-    'address': (ip, 6379),
+    'address': (DATABASE_URL, 6379),
     'encoding': 'utf8'
 }
