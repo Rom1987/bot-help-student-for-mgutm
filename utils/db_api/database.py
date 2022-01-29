@@ -1,6 +1,6 @@
 from gino import Gino
 from gino.schema import GinoSchemaVisitor
-from data.config import DATABASE_URL
+from data.config import POSTGRES_URI
 
 db = Gino()
 
@@ -10,7 +10,7 @@ db = Gino()
 
 async def create_db():
     # Устанавливаем связь с базой данных
-    await db.set_bind(DATABASE_URL)
+    await db.set_bind(POSTGRES_URI)
     db.gino: GinoSchemaVisitor
 
     # Создаем таблицы

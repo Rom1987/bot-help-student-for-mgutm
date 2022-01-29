@@ -17,7 +17,9 @@ admins = [
 ]
 
 # Ссылка подключения к базе данных
+# POSTGRES_URI = f"postgresql://{PGUSER}:{PGPASSWORD}@{ip}/{DATABASE}"
 DATABASE_URL = os.getenv("DATABASE_URL")
+POSTGRES_URI = f"postgresql://{PGUSER}:{PGPASSWORD}@{DATABASE_URL}/{DATABASE}"
 aiogram_redis = {
     'host': DATABASE_URL,
 }

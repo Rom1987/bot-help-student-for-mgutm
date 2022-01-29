@@ -4,14 +4,14 @@ from aiogram.utils.callback_data import CallbackData
 from utils.db_api.db_commands import get_subcategories, count_items, get_items, get_categories
 
 # Создаем CallbackData-объекты, которые будут нужны для работы с менюшкой
-menu_cd = CallbackData("show_menu", "level", "category", "subcategory", "item_id")
+menu_cd = CallbackData("show_menu", "level", "category", "subcategory", "item_id", "photo")
 buy_item = CallbackData("buy", "item_id")
 
 
 # С помощью этой функции будем формировать коллбек дату для каждого элемента меню, в зависимости от
 # переданных параметров. Если Подкатегория, или айди товара не выбраны - они по умолчанию равны нулю
-def make_callback_data(level, category="0", subcategory="0", item_id="0"):
-    return menu_cd.new(level=level, category=category, subcategory=subcategory, item_id=item_id)
+def make_callback_data(level, category="0", subcategory="0", item_id="0", photo="0"):
+    return menu_cd.new(level=level, category=category, subcategory=subcategory, item_id=item_id, photo=photo)
 
 
 # Создаем функцию, которая отдает клавиатуру с доступными категориями
@@ -32,7 +32,7 @@ async def categories_keyboard():
         button_text = f"{category.category_name} ({number_of_items} шт)"
 
         # Сформируем колбек дату, которая будет на кнопке. Следующий уровень - текущий + 1, и перечисляем категории
-        callback_data = make_callback_data(level=CURRENT_LEVEL + 1, category=category.category_code)
+        callback_data = make_callback_data(level=CURRENT_LEVEL + 1, category=category.category_code, photo=category.photo)
 
         # Вставляем кнопку в клавиатуру
         markup.insert(
@@ -60,7 +60,7 @@ async def subcategories_keyboard(category):
 
         # Сформируем колбек дату, которая будет на кнопке
         callback_data = make_callback_data(level=CURRENT_LEVEL + 1,
-                                           category=category, subcategory=subcategory.subcategory_code)
+                                           category=category, subcategory=subcategory.subcategory_code, photo=subcategory.photo)
         markup.insert(
             InlineKeyboardButton(text=button_text, callback_data=callback_data)
         )
@@ -91,7 +91,7 @@ async def items_keyboard(category, subcategory):
         # Сформируем колбек дату, которая будет на кнопке
         callback_data = make_callback_data(level=CURRENT_LEVEL + 1,
                                            category=category, subcategory=subcategory,
-                                           item_id=item.id)
+                                           item_id=item.id, photo=item.photo)
         markup.insert(
             InlineKeyboardButton(
                 text=button_text, callback_data=callback_data)

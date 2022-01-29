@@ -2,7 +2,7 @@ from typing import Union
 
 from aiogram import types
 from aiogram.dispatcher.filters import Command
-from aiogram.types import CallbackQuery, Message
+from aiogram.types import CallbackQuery, Message, InputMediaPhoto
 
 from keyboards.inline.menu_keyboards import menu_cd, categories_keyboard, subcategories_keyboard, \
     items_keyboard, item_keyboard
@@ -26,12 +26,19 @@ async def list_categories(message: Union[CallbackQuery, Message], **kwargs):
 
     # Проверяем, что за тип апдейта. Если Message - отправляем новое сообщение
     if isinstance(message, Message):
-        await message.answer("Смотри, что у нас есть", reply_markup=markup)
+        await message.answer_photo(photo="https://fotointeres.ru/wp-content/uploads/2012/04/0_82594_6463591f_orig.jpg",
+                                   caption="Смотри, что у нас есть", reply_markup=markup)
 
     # Если CallbackQuery - изменяем это сообщение
     elif isinstance(message, CallbackQuery):
         call = message
-        await call.message.edit_reply_markup(markup)
+        media = InputMediaPhoto(
+            media='https://pbs.twimg.com/media/EXL3ll8XYAUghMI.jpg:large',
+            caption="Смотри, что у нас есть")
+        await call.message.edit_media(
+            media=media,
+            reply_markup=markup
+        )
 
 
 # Функция, которая отдает кнопки с подкатегориями, по выбранной пользователем категории
@@ -39,7 +46,13 @@ async def list_subcategories(callback: CallbackQuery, category, **kwargs):
     markup = await subcategories_keyboard(category)
 
     # Изменяем сообщение, и отправляем новые кнопки с подкатегориями
-    await callback.message.edit_reply_markup(markup)
+    media = InputMediaPhoto(
+        media='https://avatars.mds.yandex.net/get-zen_doc/759807/pub_5be6d212ec5e1b00aa71b61c_5be6d8120bb03600a95d5050/scale_1200',
+        caption="Смотри, что у нас есть")
+    await callback.message.edit_media(
+        media=media,
+        reply_markup=markup
+    )
 
 
 # Функция, которая отдает кнопки с Названием и ценой товара, по выбранной категории и подкатегории
@@ -47,7 +60,13 @@ async def list_items(callback: CallbackQuery, category, subcategory, **kwargs):
     markup = await items_keyboard(category, subcategory)
 
     # Изменяем сообщение, и отправляем новые кнопки с подкатегориями
-    await callback.message.edit_text(text="Смотри, что у нас есть", reply_markup=markup)
+    media = InputMediaPhoto(
+        media='https://lapkins.ru/upload/uf/f79/f795e55cc07bda34c64a596af9ac28e1.jpg',
+        caption="Смотри, что у нас есть")
+    await callback.message.edit_media(
+        media=media,
+        reply_markup=markup
+    )
 
 
 # Функция, которая отдает уже кнопку Купить товар по выбранному товару
@@ -57,7 +76,16 @@ async def show_item(callback: CallbackQuery, category, subcategory, item_id):
     # Берем запись о нашем товаре из базы данных
     item = await get_item(item_id)
     text = f"Купи {item.name}"
-    await callback.message.edit_text(text=text, reply_markup=markup)
+    # await callback.message.edit_text(text=text, reply_markup=markup)
+    # with open(item.photo, 'rb') as photo:
+    # Отправляем фотку товара с подписью и кнопкой "купить"
+    # await callback.message.answer_photo(photo=photo, caption=text, reply_markup=markup)
+    # await callback.message.reply_photo(photo='./media/Ads', caption=text, reply_markup=markup)
+    media = InputMediaPhoto(media=open(item.photo, 'rb'), caption=text)
+    await callback.message.edit_media(
+        media=media,
+        reply_markup=markup
+    )
 
 
 # Функция, которая обрабатывает ВСЕ нажатия на кнопки в этой менюшке
