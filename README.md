@@ -16,9 +16,9 @@
 столбец photo=test3.jpg
 
 С файлами которыми работаете:
+
 1. ./utils/db_api/add_to_database.py
 2. ./utils/db_api/database.py
 3. .env
 
-Как будет выполнено задание надо скинуть файл ./utils/db_api/add_to_database.py
-на GitHub или в ВК
+Как будет выполнено задание надо скинуть файл ./utils/db_api/add_to_database.py на GitHub или в ВК
