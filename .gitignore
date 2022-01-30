@@ -419,3 +419,4 @@ dmypy.json
 cython_debug/
 
 !/bot-help-student-for-mgutm.drawio.lnk
+!/.env.dist.hosting
