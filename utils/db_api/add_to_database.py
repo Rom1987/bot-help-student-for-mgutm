@@ -7,44 +7,31 @@ from utils.db_api.database import create_db
 
 # Используем эту функцию, чтобы заполнить базу данных товарами
 async def add_items():
-    imageElectronics = "./media/Electronics_image.jpg"
-    imageAds = "./media/Ads_image.jpg"
-    await add_item(name="ASUS",
-                   category_name="🔌 Электроника", category_code="Electronics",
-                   subcategory_name="🖥 Компьютеры", subcategory_code="PCs",
-                   price=100, photo=imageElectronics)
-    await add_item(name="DELL",
-                   category_name="🔌 Электроника", category_code="Electronics",
-                   subcategory_name="🖥 Компьютеры", subcategory_code="PCs",
-                   price=100, photo=imageElectronics)
-    await add_item(name="Apple",
-                   category_name="🔌 Электроника", category_code="Electronics",
-                   subcategory_name="🖥 Компьютеры", subcategory_code="PCs",
-                   price=100, photo=imageElectronics)
-    await add_item(name="Iphone",
-                   category_name="🔌 Электроника", category_code="Electronics",
-                   subcategory_name="☎️ Телефоны", subcategory_code="Phones",
-                   price=100, photo=imageElectronics)
+    await add_item(name="Бакалавриат",
+                   category_name="Выбрать профессию", category_code="Choose a profession",
+                   photo="Бакалавриат.jpg")
+    await add_item(name="Магистратура",
+                   category_name="Выбрать профессию", category_code="Choose a profession",
+                   photo="Магистратура.jpg")
+
+    imageElectronics = "Electronics_image.jpg"
     await add_item(name="Xiaomi",
                    category_name="🔌 Электроника", category_code="Electronics",
-                   subcategory_name="☎️ Телефоны", subcategory_code="Phones",
-                   price=100, photo=imageElectronics)
+                   photo=imageElectronics)
+
+    imageAds = "Ads_image.jpg"
     await add_item(name="PewDiePie",
                    category_name="🛍 Услуги Рекламы", category_code="Ads",
-                   subcategory_name="📹 На Youtube", subcategory_code="Youtube",
-                   price=100, photo=imageAds)
+                   photo=imageAds)
     await add_item(name="Топлес",
                    category_name="🛍 Услуги Рекламы", category_code="Ads",
-                   subcategory_name="📹 На Youtube", subcategory_code="Youtube",
-                   price=100, photo=imageAds)
+                   photo=imageAds)
     await add_item(name="Орлёнок",
                    category_name="🛍 Услуги Рекламы", category_code="Ads",
-                   subcategory_name="🗣 На Вконтакте", subcategory_code="VK",
-                   price=100, photo=imageAds)
+                   photo=imageAds)
     await add_item(name="МДК",
                    category_name="🛍 Услуги Рекламы", category_code="Ads",
-                   subcategory_name="🗣 На Вконтакте", subcategory_code="VK",
-                   price=100, photo=imageAds)
+                   photo=imageAds)
 
 
 loop = asyncio.get_event_loop()

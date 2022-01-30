@@ -17,16 +17,9 @@ class Item(db.Model):
     # Название категории (для отображения в кнопке)
     category_name = Column(String(50))
 
-    # Код подкатегории (для отображения в колбек дате)
-    subcategory_code = Column(String(50))
-
-    # Название подкатегории (для отображения в кнопке)
-    subcategory_name = Column(String(20))
-
     # Название, фото и цена товара
     name = Column(String(50))
     photo = Column(String(250))
-    price = Column(Integer)
 
     def __repr__(self):
         return f"""
